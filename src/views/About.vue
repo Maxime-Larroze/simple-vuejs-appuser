@@ -3,13 +3,13 @@
     <div>
       <div class="card mb-2 mt-2">
         <div class="card-header p-3">
-          <h1>VueJS example</h1>
+          <h1>VueJS APP User example</h1>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-2">
+          <div class="row text-center">
+            <div class="col-md-2  mt-2 mb-2">
               <button class="btn btn-primary" @click="fetchUsers">
-                Fetch all users
+                Récupérer tous les utilisateurs
               </button>
             </div>
             <Listview :options="['All', 'male', 'female']" v-model="gender" />
@@ -60,7 +60,7 @@
               >
                 Naissance
               </th>
-              <th>Gender</th>
+              <th>Genre</th>
             </tr>
           </thead>
           <tbody>
@@ -102,46 +102,40 @@ export default {
       return this.search.toLowerCase().split(" ");
     },
     filteredList() {
-      return (
-        this.nonFilteredUsers
-          // Recherche
-          .filter((user) =>
-            this.searchWords.every((word) =>
-              user.name
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .includes(word)
-            )
+      return this.nonFilteredUsers
+        .filter((user) =>
+          this.searchWords.every((word) =>
+            user.name
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .includes(word)
           )
-          // Filtre par genres
-          .filter((user) => {
-            if (this.gender === "All") return true;
-            if (this.gender === "") return true;
-            return user.gender === this.gender;
-          })
-          // tri par ordre alphabétique
-          .sort((p1, p2) => {
-            const modifier = this.sortDirection === "asc" ? 1 : -1;
-            if (!this.sortBy) return 0;
-            if (typeof p1[this.sortBy] === "number")
-              return modifier * (p1[this.sortBy] - p2[this.sortBy]);
-            return modifier * p1[this.sortBy].localeCompare(p2[this.sortBy]);
-          })
-          // Met en gras les resultats recherché
-          .map((user) => {
-            const nameFormated = this.searchWords.length
-              ? user.name.replace(
-                  new RegExp(this.searchWords.join("|"), "gi"),
-                  '<span class="highlight">$&</span>'
-                )
-              : user.name;
-            return {
-              ...user,
-              nameFormated,
-            };
-          })
-      );
+        )
+        .filter((user) => {
+          if (this.gender === "All") return true;
+          if (this.gender === "") return true;
+          return user.gender === this.gender;
+        })
+        .sort((p1, p2) => {
+          const modifier = this.sortDirection === "asc" ? 1 : -1;
+          if (!this.sortBy) return 0;
+          if (typeof p1[this.sortBy] === "number")
+            return modifier * (p1[this.sortBy] - p2[this.sortBy]);
+          return modifier * p1[this.sortBy].localeCompare(p2[this.sortBy]);
+        })
+        .map((user) => {
+          const nameFormated = this.searchWords.length
+            ? user.name.replace(
+                new RegExp(this.searchWords.join("|"), "gi"),
+                '<span class="highlight">$&</span>'
+              )
+            : user.name;
+          return {
+            ...user,
+            nameFormated,
+          };
+        });
     },
   },
   methods: {
