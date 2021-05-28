@@ -5,13 +5,48 @@
         <div class="card-header p-3">
           <h1>VueJS APP User example</h1>
         </div>
+        <UserModal />
         <div class="card-body">
           <div class="row text-center">
-            <div class="col-md-2  mt-2 mb-2">
-              <button class="btn btn-primary" @click="fetchUsers">
-                Récupérer tous les utilisateurs
+            <div class="col-md-6 mt-2 mb-2">
+              <div
+                class="alert alert-danger alert-dismissible fade show text-center"
+                v-if="this.$route.params.successUpdate === 'undefined'"
+              >
+                <button type="button" class="close" data-dismiss="alert">
+                  &times;
+                </button>
+                L'utilisateur à bien été créé
+              </div>
+              <div
+                class="alert alert-danger alert-dismissible fade show text-center"
+                v-show="this.$route.params.successUpdate === 'undefined'"
+              >
+                <button type="button" class="close" data-dismiss="alert">
+                  &times;
+                </button>
+                L'utilisateur à bien été mis à jour
+              </div>
+              <div
+                class="alert alert-danger alert-dismissible fade show text-center"
+                v-show="this.$route.params.successDelete === 'undefined'"
+              >
+                <button type="button" class="close" data-dismiss="alert">
+                  &times;
+                </button>
+                L'utilisateur à bien été supprimé
+              </div>
+            </div>
+            <div class="col-md-6 mt-2 mb-2">
+              <button class="btn btn-info" @click="show()">
+                Créer un nouvel utilisateur
               </button>
             </div>
+            <!-- <div class="col-md-12">
+              <div class="spinner-grow text-primary"></div>
+              <span> Chargement en cours... </span>
+              <div class="spinner-grow text-primary"></div>
+            </div> -->
             <Listview :options="['All', 'male', 'female']" v-model="gender" />
             <div class="col-md-4">
               <input
@@ -32,10 +67,15 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <table id="tbl-users" class="table table-hover">
+        <table
+          id="tbl-users"
+          class="table table-hover table-striped thead-dark"
+        >
           <thead>
             <tr>
-              <th />
+              <th>
+                Image
+              </th>
               <th
                 :class="[sortBy === 'name' ? sortDirection : '']"
                 @click="sort('name')"
@@ -58,19 +98,42 @@
                 :class="[sortBy === 'age' ? sortDirection : '']"
                 @click="sort('age')"
               >
-                Naissance
+                Age
               </th>
               <th>Genre</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="user in filteredList" :key="user.email">
-              <td><img :src="user.avatar" /></td>
+              <td>
+                <img
+                  :src="user.avatar"
+                  class="img img-fluid float-left card-img mx-auto d-block"
+                  style="width: 10%;"
+                />
+              </td>
               <td v-html="user.nameFormated" />
               <td>{{ user.email }}</td>
               <td>{{ user.phone }}</td>
               <td>{{ user.age }}</td>
               <td>{{ user.gender }}</td>
+              <td>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <router-link :to="{ path: '/user/' + user.id }"
+                      ><button class="btn btn-warning">
+                        Détails
+                      </button></router-link
+                    >
+                  </div>
+                  <div class="col-lg-6">
+                    <button class="btn btn-danger" @click="deleteUser(user.id)">
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -81,13 +144,21 @@
 <script>
 import axios from "axios";
 import Listview from "../components/Listview.vue";
+// import { loader } from "./components/Loader.vue";
+import UserModal from "../components/UserModal.vue";
 
 export default {
   components: {
     Listview,
+    UserModal,
+  },
+  created() {
+    this.fetchUsers();
+    console.log(this.$route.params);
   },
   data() {
     return {
+      show: false,
       gender: "",
       age: "",
       nonFilteredUsers: [],
@@ -155,18 +226,34 @@ export default {
       this.sortBy = sortby;
     },
     fetchUsers() {
-      axios("https://randomuser.me/api/?results=20").then(
-        ({ data: { results } }) => {
-          this.nonFilteredUsers = results.map((user) => ({
-            age: user.dob.age,
-            name: `${user.name.first} ${user.name.last.toUpperCase()}`,
+      axios.defaults.showLoader = true;
+      axios("https://ynov-front.herokuapp.com/api/users").then(
+        ({ data: { data } }) => {
+          this.nonFilteredUsers = data.map((user) => ({
+            age:
+              new Date(
+                Date.now() - new Date(user.birthDate).getTime()
+              ).getFullYear() - 1970,
+            name: `${user.firstName} ${user.lastName.toUpperCase()}`,
             email: user.email,
             phone: user.phone,
             gender: user.gender,
-            avatar: user.picture.thumbnail,
+            avatar: user.avatarUrl,
+            details: user.details,
+            id: user._id,
           }));
         }
       );
+      axios.defaults.showLoader = false;
+    },
+    deleteUser(id) {
+      axios
+        .delete("https://ynov-front.herokuapp.com/api/users/" + id)
+        .then((response) => {
+          this.result.splice(id, 1);
+          console.log(this.result);
+        });
+      this.$router.push({ name: "/About", successDelete: true });
     },
   },
 };

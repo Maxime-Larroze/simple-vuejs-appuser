@@ -1,6 +1,12 @@
 <template>
   <div>
-    <select id="value" :value="value" @change="changeVal" class="form-select" name="value">
+    <select
+      id="value"
+      :value="value"
+      @change="changeVal"
+      class="form-select text-center"
+      name="value"
+    >
       <option v-for="item in options" :key="item.message">
         {{ item }}
       </option>
@@ -12,12 +18,12 @@ export default {
   name: "Listview",
   props: {
     value: String,
-    options: Array
+    options: Array,
   },
   methods: {
     changeVal(event) {
       this.$emit("input", event.target.value);
-    }
-  }
+    },
+  },
 };
 </script>
