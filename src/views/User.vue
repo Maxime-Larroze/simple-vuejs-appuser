@@ -10,57 +10,63 @@
         </div>
         <div class="card-body">
           <div class="row text-center">
-            <div class="col-md-12 mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <img :src="avatar" class="mx-auto d-block" width="20%" />
             </div>
 
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="lastName">Nom</label>
                 <p>{{ lastName }}</p>
               </div>
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="firstname">Prénom</label>
                 <p>{{ firstName }}</p>
               </div>
             </div>
 
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="phone">Numéro de téléphone</label>
                 <p>{{ phone }}</p>
               </div>
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="email">Adresse email</label>
                 <p>{{ email }}</p>
               </div>
             </div>
 
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="gender">Genre</label>
                 <p>{{ gender }}</p>
               </div>
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="age">Date de naissance</label>
                 <p>{{ age }}</p>
               </div>
             </div>
 
-            <div class="col-md-12  mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <div class="form-group">
                 <label for="details">Détails</label>
                 <p>{{ details }}</p>
               </div>
             </div>
 
-            <div class="col-md-12  mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <router-link :to="{ path: '/users/update/' + id }"
                 ><button class="btn btn-warning text-white">
                   <i class="fas fa-edit"></i> Editer
@@ -69,6 +75,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="card-header p-3">
+        <p>Copyright Hackenathon-System &copy; 2021 - Tous droits réservés</p>
       </div>
     </div>
   </div>

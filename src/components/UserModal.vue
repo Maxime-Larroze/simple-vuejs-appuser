@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn btn-info text-white" @click="openModal">
+    <button class="btn btn-primary text-white" @click="openModal">
       <i class="fas fa-plus-square"></i> Créer un nouvel utilisateur
     </button>
     <transition name="fade">
@@ -22,7 +22,9 @@
               <!-- Modal body -->
               <div class="modal-body">
                 <div class="row text-center">
-                  <div class="col-md-12 mt-2 mb-2">
+                  <div
+                    class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+                  >
                     <label for="modalAvatarUrl">Lien de la photo</label>
                     <input
                       type="text"
@@ -33,7 +35,9 @@
                       placeholder="Adresse URL de l'image de profil"
                     />
                   </div>
-                  <div class="col-md-6  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalLastName">Nom</label>
                       <input
@@ -46,7 +50,9 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-6  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalFirstName">Prénom</label>
                       <input
@@ -60,7 +66,9 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalPhone">Numéro de téléphone</label>
                       <input
@@ -73,7 +81,9 @@
                       />
                     </div>
                   </div>
-                  <div class="col-md-6  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalEmail">Adresse email</label>
                       <input
@@ -87,7 +97,9 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalGender">Genre</label>
                       <select
@@ -100,7 +112,9 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-6  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalAge">Date de naissance</label>
                       <input
@@ -114,7 +128,9 @@
                     </div>
                   </div>
 
-                  <div class="col-md-12  mt-2 mb-2">
+                  <div
+                    class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+                  >
                     <div class="form-group">
                       <label for="modalDetails">Détails</label>
                       <textarea
@@ -127,22 +143,32 @@
                       ></textarea>
                     </div>
                   </div>
-                  <div class="col-md-12  mt-2 mb-2">
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2 text-center"
+                  >
                     <button class="btn btn-primary" @click="createUser()">
                       Créer l'utilisateur
+                    </button>
+                  </div>
+                  <div
+                    class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2 text-center"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      @click="closeModal()"
+                    >
+                      Annuler
                     </button>
                   </div>
                 </div>
               </div>
 
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  @click="closeModal()"
-                >
-                  Annuler
-                </button>
+                <p>
+                  Copyright Hackenathon-System &copy; 2021 - Tous droits
+                  réservés
+                </p>
               </div>
             </div>
           </div>

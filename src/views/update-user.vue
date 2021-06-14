@@ -14,10 +14,14 @@
         </div>
         <div class="card-body">
           <div class="row text-center">
-            <div class="col-md-12 mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <img :src="avatar" class="mx-auto d-block" width="20%" />
             </div>
-            <div class="col-md-12 mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <label for="avatarUrl">Lien de la photo</label>
               <input
                 type="text"
@@ -27,7 +31,7 @@
                 v-model="avatar"
               />
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="lastName">Nom</label>
                 <input
@@ -39,7 +43,7 @@
                 />
               </div>
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="firstname">Prénom</label>
                 <input
@@ -52,7 +56,7 @@
               </div>
             </div>
 
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="phone">Numéro de téléphone</label>
                 <input
@@ -64,7 +68,7 @@
                 />
               </div>
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="email">Adresse email</label>
                 <input
@@ -77,7 +81,7 @@
               </div>
             </div>
 
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="gender">Genre</label>
                 <select v-model="gender" class="form-select text-center">
@@ -86,7 +90,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-6  mt-2 mb-2">
+            <div class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2">
               <div class="form-group">
                 <label for="age">Date de naissance</label>
                 <input
@@ -99,7 +103,9 @@
               </div>
             </div>
 
-            <div class="col-md-12  mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <div class="form-group">
                 <label for="details">Détails</label>
                 <textarea
@@ -119,6 +125,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="card-header p-3">
+        <p>Copyright Hackenathon-System &copy; 2021 - Tous droits réservés</p>
       </div>
     </div>
   </div>

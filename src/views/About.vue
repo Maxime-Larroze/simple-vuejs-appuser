@@ -11,7 +11,9 @@
               Impossible de supprimer cet utilisateur. Veuillez réessayer dans
               un instant.
             </div>
-            <div class="col-md-12 mt-2 mb-2">
+            <div
+              class="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2 mb-2"
+            >
               <div
                 class="text-success text-center"
                 v-show="this.$route.params.success === '0'"
@@ -31,15 +33,10 @@
                 L'utilisateur à bien été supprimé
               </div>
             </div>
-            <!-- <div class="col-md-12">
-              <div class="spinner-grow text-primary"></div>
-              <span> Chargement en cours... </span>
-              <div class="spinner-grow text-primary"></div>
-            </div> -->
-            <div class="col-md-3">
+            <div class="col-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
               <Listview :options="['All', 'male', 'female']" v-model="gender" />
             </div>
-            <div class="col-md-3">
+            <div class="col-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
               <input
                 id="search"
                 v-model="search"
@@ -49,10 +46,10 @@
                 placeholder="Rechercher"
               />
             </div>
-            <div class="col-md-3">
-              <span class="lead">{{ filteredList.length }} lignes</span>
+            <div class="col-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+              <span class="lead">{{ filteredList.length }} utilisateurs</span>
             </div>
-            <div class="col-md-3">
+            <div class="col-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
               <UserModal></UserModal>
             </div>
           </div>
@@ -118,19 +115,19 @@
               <td>{{ user.gender }}</td>
               <td>
                 <div class="row">
-                  <div class="col-lg-4">
+                  <div class="col-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                     <router-link :to="{ path: '/users/' + user.id }"
                       ><button class="btn btn-primary">
                         <i class="fas fa-eye"></i></button
                     ></router-link>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                     <router-link :to="{ path: '/users/update/' + user.id }"
                       ><button class="btn btn-warning">
                         <i class="fas fa-edit text-white"></i></button
                     ></router-link>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                     <button class="btn btn-danger" @click="deleteUser(user.id)">
                       <i class="fas fa-trash-alt"></i>
                     </button>
@@ -141,6 +138,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="card-header p-3">
+      <p>Copyright Hackenathon-System &copy; 2021 - Tous droits réservés</p>
     </div>
   </div>
 </template>
