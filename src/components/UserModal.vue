@@ -6,7 +6,7 @@
     <transition name="fade">
       <div class="modal show" v-if="show">
         <div class="modal" id="myModal">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Créer un nouvel utilisateur</h4>

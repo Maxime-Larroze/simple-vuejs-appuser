@@ -3,7 +3,7 @@
     <div>
       <div class="card mb-2 mt-2">
         <div class="card-header p-3">
-          <h1>VueJS APP User example</h1>
+          <h1>Gestion des utilisateurs</h1>
         </div>
         <div class="card-body">
           <div class="row text-center">
@@ -111,7 +111,15 @@
               <td>
                 <a v-bind:href="'mailto:' + user.phone">{{ user.phone }}</a>
               </td>
-              <td>{{ user.age }}</td>
+              <td>
+                {{ user.age }}
+                <img
+                  src="https://images.emojiterra.com/google/android-pie/512px/1f51e.png"
+                  width="20px"
+                  alt="Moins de 18 ans"
+                  v-if="user.age < 18"
+                />
+              </td>
               <td>{{ user.gender }}</td>
               <td>
                 <div class="row">
@@ -127,7 +135,10 @@
                         <i class="fas fa-edit text-white"></i></button
                     ></router-link>
                   </div>
-                  <div class="col-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+                  <div
+                    class="col-4 col-md-4 col-lg-4 col-xl-4 col-xxl-4"
+                    v-if="user.age > 18"
+                  >
                     <button class="btn btn-danger" @click="deleteUser(user.id)">
                       <i class="fas fa-trash-alt"></i>
                     </button>
