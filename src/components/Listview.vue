@@ -7,6 +7,7 @@
       class="form-select text-center"
       name="value"
     >
+      <option disabled selected hidden>Sexe de l'utilisateur</option>
       <option v-for="item in options" :key="item.message">
         {{ item }}
       </option>

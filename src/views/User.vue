@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="text-left">
+      <a @click="$router.go(-1)"><i class="fas fa-undo-alt"></i> Retour</a>
+    </div>
     <div>
       <div class="card mb-2 mt-2">
         <div class="card-header p-3">
@@ -10,105 +13,59 @@
             <div class="col-md-12 mt-2 mb-2">
               <img :src="avatar" class="mx-auto d-block" width="20%" />
             </div>
-            <div class="col-md-12 mt-2 mb-2">
-              <label for="avatarUrl">Lien de la photo</label>
-              <input
-                type="text"
-                class="form-control text-center"
-                name="avatar"
-                id="avatar"
-                v-model="avatar"
-              />
-            </div>
+
             <div class="col-md-6  mt-2 mb-2">
               <div class="form-group">
                 <label for="lastName">Nom</label>
-                <input
-                  type="text"
-                  class="form-control text-center"
-                  placeholder="Votre nom"
-                  v-model="lastName"
-                  id="lastName"
-                />
+                <p>{{ lastName }}</p>
               </div>
             </div>
             <div class="col-md-6  mt-2 mb-2">
               <div class="form-group">
                 <label for="firstname">Prénom</label>
-                <input
-                  type="text"
-                  class="form-control text-center"
-                  placeholder="Votre prénom"
-                  id="firstName"
-                  v-model="firstName"
-                />
+                <p>{{ firstName }}</p>
               </div>
             </div>
 
             <div class="col-md-6  mt-2 mb-2">
               <div class="form-group">
                 <label for="phone">Numéro de téléphone</label>
-                <input
-                  type="tel"
-                  class="form-control text-center"
-                  placeholder="Votre numéro de téléphone"
-                  id="phone"
-                  v-model="phone"
-                />
+                <p>{{ phone }}</p>
               </div>
             </div>
             <div class="col-md-6  mt-2 mb-2">
               <div class="form-group">
                 <label for="email">Adresse email</label>
-                <input
-                  type="email"
-                  class="form-control text-center"
-                  placeholder="Votre adresse email"
-                  id="email"
-                  v-model="email"
-                />
+                <p>{{ email }}</p>
               </div>
             </div>
 
             <div class="col-md-6  mt-2 mb-2">
               <div class="form-group">
                 <label for="gender">Genre</label>
-                <select v-model="gender" class="form-select text-center">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
+                <p>{{ gender }}</p>
               </div>
             </div>
             <div class="col-md-6  mt-2 mb-2">
               <div class="form-group">
                 <label for="age">Date de naissance</label>
-                <input
-                  type="date"
-                  class="form-control text-center"
-                  placeholder="Votre date de naissance"
-                  id="age"
-                  v-model="age"
-                />
+                <p>{{ age }}</p>
               </div>
             </div>
 
             <div class="col-md-12  mt-2 mb-2">
               <div class="form-group">
                 <label for="details">Détails</label>
-                <textarea
-                  class="form-control"
-                  rows="5"
-                  v-model="details"
-                  name="details"
-                  id="details"
-                ></textarea>
+                <p>{{ details }}</p>
               </div>
-              <button
-                class="text-center btn btn-success mt-3"
-                @click="updateUser(id)"
+            </div>
+
+            <div class="col-md-12  mt-2 mb-2">
+              <router-link :to="{ path: '/users/update/' + id }"
+                ><button class="btn btn-warning text-white">
+                  <i class="fas fa-edit"></i> Editer
+                </button></router-link
               >
-                Modifier
-              </button>
             </div>
           </div>
         </div>
@@ -130,7 +87,7 @@ export default {
       email: "",
       phone: "",
       gender: "",
-      avatarUrl: "",
+      avatar: "",
       details: "",
       age: "",
     };
@@ -140,7 +97,7 @@ export default {
     async fetchUsers(id) {
       await axios("https://ynov-front.herokuapp.com/api/users/" + id).then(
         ({ data: { data } }) => {
-          (this.age = new Date(data.birthDate)),
+          (this.age = new Date(data.birthDate).toLocaleDateString("fr-FR")),
             (this.firstName = `${data.firstName}`),
             (this.lastName = `${data.lastName.toUpperCase()}`),
             (this.email = data.email),
@@ -151,25 +108,6 @@ export default {
             (this.id = data._id);
         }
       );
-    },
-    updateUser(id) {
-      const user = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        phone: this.phone,
-        gender: this.gender,
-        avatarUrl: this.avatar,
-        details: this.details,
-        birthDate: this.age,
-      };
-      axios
-        .put("https://ynov-front.herokuapp.com/api/users/" + id, user)
-        .then((response) => {
-          this.result.splice(user, 1);
-          console.log(this.result);
-        });
-      this.$router.push({ name: "/About", successUpdate: true });
     },
   },
 };

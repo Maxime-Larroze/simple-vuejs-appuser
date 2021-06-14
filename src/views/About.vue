@@ -5,50 +5,41 @@
         <div class="card-header p-3">
           <h1>VueJS APP User example</h1>
         </div>
-        <UserModal />
         <div class="card-body">
           <div class="row text-center">
-            <div class="col-md-6 mt-2 mb-2">
+            <div class="text-danger text-center" v-show="isErrorVisible">
+              Impossible de supprimer cet utilisateur. Veuillez réessayer dans
+              un instant.
+            </div>
+            <div class="col-md-12 mt-2 mb-2">
               <div
-                class="alert alert-danger alert-dismissible fade show text-center"
-                v-if="this.$route.params.successUpdate === 'undefined'"
+                class="text-success text-center"
+                v-show="this.$route.params.success === '0'"
               >
-                <button type="button" class="close" data-dismiss="alert">
-                  &times;
-                </button>
                 L'utilisateur à bien été créé
               </div>
               <div
-                class="alert alert-danger alert-dismissible fade show text-center"
-                v-show="this.$route.params.successUpdate === 'undefined'"
+                class="text-success text-center"
+                v-show="this.$route.params.success === '1'"
               >
-                <button type="button" class="close" data-dismiss="alert">
-                  &times;
-                </button>
                 L'utilisateur à bien été mis à jour
               </div>
               <div
-                class="alert alert-danger alert-dismissible fade show text-center"
-                v-show="this.$route.params.successDelete === 'undefined'"
+                class="text-success text-center"
+                v-show="this.$route.params.success === '2'"
               >
-                <button type="button" class="close" data-dismiss="alert">
-                  &times;
-                </button>
                 L'utilisateur à bien été supprimé
               </div>
-            </div>
-            <div class="col-md-6 mt-2 mb-2">
-              <button class="btn btn-info" @click="show()">
-                Créer un nouvel utilisateur
-              </button>
             </div>
             <!-- <div class="col-md-12">
               <div class="spinner-grow text-primary"></div>
               <span> Chargement en cours... </span>
               <div class="spinner-grow text-primary"></div>
             </div> -->
-            <Listview :options="['All', 'male', 'female']" v-model="gender" />
-            <div class="col-md-4">
+            <div class="col-md-3">
+              <Listview :options="['All', 'male', 'female']" v-model="gender" />
+            </div>
+            <div class="col-md-3">
               <input
                 id="search"
                 v-model="search"
@@ -58,8 +49,11 @@
                 placeholder="Rechercher"
               />
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               <span class="lead">{{ filteredList.length }} lignes</span>
+            </div>
+            <div class="col-md-3">
+              <UserModal></UserModal>
             </div>
           </div>
         </div>
@@ -110,26 +104,35 @@
                 <img
                   :src="user.avatar"
                   class="img img-fluid float-left card-img mx-auto d-block"
-                  style="width: 10%;"
+                  style="width: 100px;"
                 />
               </td>
               <td v-html="user.nameFormated" />
-              <td>{{ user.email }}</td>
-              <td>{{ user.phone }}</td>
+              <td>
+                <a v-bind:href="'mailto:' + user.email">{{ user.email }}</a>
+              </td>
+              <td>
+                <a v-bind:href="'mailto:' + user.phone">{{ user.phone }}</a>
+              </td>
               <td>{{ user.age }}</td>
               <td>{{ user.gender }}</td>
               <td>
                 <div class="row">
-                  <div class="col-lg-6">
-                    <router-link :to="{ path: '/user/' + user.id }"
-                      ><button class="btn btn-warning">
-                        Détails
-                      </button></router-link
-                    >
+                  <div class="col-lg-4">
+                    <router-link :to="{ path: '/users/' + user.id }"
+                      ><button class="btn btn-primary">
+                        <i class="fas fa-eye"></i></button
+                    ></router-link>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-4">
+                    <router-link :to="{ path: '/users/update/' + user.id }"
+                      ><button class="btn btn-warning">
+                        <i class="fas fa-edit text-white"></i></button
+                    ></router-link>
+                  </div>
+                  <div class="col-lg-4">
                     <button class="btn btn-danger" @click="deleteUser(user.id)">
-                      Supprimer
+                      <i class="fas fa-trash-alt"></i>
                     </button>
                   </div>
                 </div>
@@ -144,9 +147,7 @@
 <script>
 import axios from "axios";
 import Listview from "../components/Listview.vue";
-// import { loader } from "./components/Loader.vue";
 import UserModal from "../components/UserModal.vue";
-
 export default {
   components: {
     Listview,
@@ -154,7 +155,6 @@ export default {
   },
   created() {
     this.fetchUsers();
-    console.log(this.$route.params);
   },
   data() {
     return {
@@ -165,6 +165,8 @@ export default {
       sortBy: "",
       sortDirection: "asc",
       search: "",
+      isErrorVisible: false,
+      isModalOpened: false,
     };
   },
   computed: {
@@ -210,6 +212,9 @@ export default {
     },
   },
   methods: {
+    showError() {
+      this.isErrorVisible = true;
+    },
     sort(sortby) {
       if (sortby === this.sortBy) {
         if (this.sortDirection === "desc") {
@@ -250,11 +255,21 @@ export default {
       axios
         .delete("https://ynov-front.herokuapp.com/api/users/" + id)
         .then((response) => {
-          this.result.splice(id, 1);
           console.log(this.result);
+          if (response.status === 204 || response.status === 200) {
+            this.$router.push({ path: "/about/" + 2 });
+          }
+        })
+        .catch((error) => {
+          this.showError();
+          console.log(error);
         });
-      this.$router.push({ name: "/About", successDelete: true });
     },
   },
 };
 </script>
+<style lang="scss">
+.overflow-hidden {
+  overflow: hidden;
+}
+</style>
