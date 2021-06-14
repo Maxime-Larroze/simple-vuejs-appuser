@@ -77,7 +77,13 @@
         </div>
       </div>
       <div class="card-header p-3">
-        <p>Copyright Hackenathon-System &copy; 2021 - Tous droits réservés</p>
+        <p>
+          Copyright
+          <a href="http://hackenathon-system.ddns.net:35000/"
+            >Hackenathon-System</a
+          >
+          &copy; 2021 - Tous droits réservés
+        </p>
       </div>
     </div>
   </div>

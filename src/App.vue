@@ -17,8 +17,10 @@
       crossorigin="anonymous"
     />
     <div id="nav">
-      <router-link to="/">Menu</router-link> |
-      <router-link to="/about">Gestion des utilisateurs</router-link>
+      <router-link to="/"><i class="fas fa-home"></i> Menu</router-link> |
+      <router-link to="/about"
+        ><i class="fas fa-users"></i> Gestion des utilisateurs</router-link
+      >
     </div>
     <router-view />
   </div>

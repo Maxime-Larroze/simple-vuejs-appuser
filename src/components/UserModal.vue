@@ -1,7 +1,7 @@
 <template>
   <div>
     <button class="btn btn-primary text-white" @click="openModal">
-      <i class="fas fa-plus-square"></i> Créer un nouvel utilisateur
+      <i class="fas fa-external-link-alt"></i> Créer un nouvel utilisateur
     </button>
     <transition name="fade">
       <div class="modal show" v-if="show">
@@ -147,7 +147,7 @@
                     class="col-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 mt-2 mb-2 text-center"
                   >
                     <button class="btn btn-primary" @click="createUser()">
-                      Créer l'utilisateur
+                      <i class="far fa-plus-square"></i> Créer l'utilisateur
                     </button>
                   </div>
                   <div
@@ -158,7 +158,7 @@
                       class="btn btn-danger"
                       @click="closeModal()"
                     >
-                      Annuler
+                      <i class="fas fa-ban"></i> Annuler
                     </button>
                   </div>
                 </div>
@@ -166,8 +166,11 @@
 
               <div class="modal-footer">
                 <p>
-                  Copyright Hackenathon-System &copy; 2021 - Tous droits
-                  réservés
+                  Copyright
+                  <a href="http://hackenathon-system.ddns.net:35000/"
+                    >Hackenathon-System</a
+                  >
+                  &copy; 2021 - Tous droits réservés
                 </p>
               </div>
             </div>
