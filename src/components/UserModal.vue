@@ -168,6 +168,14 @@ export default {
       show: false,
     };
   },
+  mounted() {
+    document.body.addEventListener("keyup", (e) => {
+      if (e.keyCode === 27) {
+        this.show = false;
+        document.querySelector("body").classList.remove("overflow-hidden");
+      }
+    });
+  },
   methods: {
     closeModal() {
       this.show = false;

@@ -6,7 +6,7 @@
     <div>
       <div class="card mb-2 mt-2">
         <div class="card-header p-3">
-          <h1>Détail de l'utilisateur</h1>
+          <h1>Détail de l'utilisateur {{ firstName }} {{ lastName }}</h1>
         </div>
         <div class="card-body">
           <div class="row text-center">
