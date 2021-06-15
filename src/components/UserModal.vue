@@ -200,8 +200,7 @@ export default {
   mounted() {
     document.body.addEventListener("keyup", (e) => {
       if (e.keyCode === 27) {
-        this.show = false;
-        document.querySelector("body").classList.remove("overflow-hidden");
+        this.closeModal();
       }
     });
   },
@@ -231,6 +230,7 @@ export default {
           console.log(response);
           console.log(response.status);
           if (response.status === 200 || response.status === 204) {
+            this.closeModal();
             this.$router.push({ path: "/about/" + 0 });
           }
         })
