@@ -21,6 +21,8 @@
       <router-link to="/about"
         ><i class="fas fa-users"></i> Gestion des utilisateurs</router-link
       >
+      |
+      <a href="http://localhost:8002/api">API</a>
     </div>
     <router-view />
   </div>
